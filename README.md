@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Gita AI
 
-## Getting Started
+Gita AI is a spiritual-conversation prototype that uses Groq-hosted language models to respond through Krishna, Ram, or Hanuman personas.
 
-First, run the development server:
+## Core features
+
+- Landing page describing the spiritual chat experience.
+- Chat interface with selectable Krishna, Ram, and Hanuman personas.
+- Persona-specific system prompts and response styling.
+- Multiple local chat threads with create, switch, and delete controls.
+- Conversation history persisted in browser `localStorage`.
+- Automatic retry handling for failed model requests.
+
+## Technology stack
+
+- Next.js 15 App Router and React 19
+- JavaScript and Tailwind CSS 3
+- Groq JavaScript SDK
+- Framer Motion and next-themes
+
+## Prerequisites
+
+- Node.js compatible with the locked dependencies
+- npm
+- A Groq API key for chat responses
+
+## Local setup
 
 ```bash
+git clone https://github.com/varunisrani/gitaaii.git
+cd gitaaii
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Production build and start commands:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm run start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Lint the project with `npm run lint`.
 
-## Learn More
+## Configuration
 
-To learn more about Next.js, take a look at the following resources:
+Create a local `.env` file and define only the variables you need:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `GROQ_API_KEY` — required by the chat client
+- `WEBSITE_URL` — optional site URL override
+- `APP_NAME` — optional application-name override
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Never commit API-key values.
 
-## Deploy on Vercel
+## Project structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `app/page.js` — marketing landing page
+- `app/chat/page.js` — persona selection, chat state, and Groq requests
+- `app/components/` — shared theme control
+- `config.js` — environment-backed runtime settings
+- `next.config.js` — exported Next.js environment settings
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Status and limitations
+
+This is an experimental client-side application, not an authoritative religious or counselling service. The current chat code sends requests directly from the browser and enables browser use in the Groq SDK, which exposes `GROQ_API_KEY` to clients; move model calls behind a server-side route before deployment. Several landing-page links are placeholders.
